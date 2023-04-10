@@ -7,5 +7,24 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 제목태그 -->
+    <h1>Log in</h1>
+    <!-- 글의 문단 태그 -->
+    <p>이 페이지는 로그인 페이지입니다. </p>
+    <!-- 하이퍼링크 생성 localhost:3000/second -->
+    <a href="/second">second page로 이동</a>
+    <a href="https://www.google.com">Google로 이동</a>
+    <!-- 유저가 입력할수 있는 공간 -->
+    <form action="/login" method="post">
+        <div>
+            <label>ID</label>
+            <input type="text" name="_id">
+        </div>
+        <div>
+            <label>PASSWORD</label>
+            <input type="password" name = "_pass">
+        </div>
+        <input type="submit">
+    </form>
 </body>
 </html>
