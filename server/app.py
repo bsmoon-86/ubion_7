@@ -1,6 +1,7 @@
 # 라이브러리 로드 
 from flask import Flask, render_template, request, redirect, jsonify
 import pandas as pd
+import json
 
 # Flask 클래스 생성
 # __name__ : 현재 파일의 이름
@@ -39,11 +40,12 @@ def corona():
     print(servicekey)
     if servicekey == "aaa":
         df = pd.read_csv("../csv/corona.csv")
-        json_data = df.to_json()
-        return jsonify(json_data)
+        df = df.dropna(axis=0)
+        dict_data = df.to_dict("records")
+        return dict_data
     else:
         return "servicekey error"
 
 
 
-app.run(port=3000)
+app.run(host='0.0.0.0',port=3000)
