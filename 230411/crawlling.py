@@ -67,4 +67,4 @@ df.columns = ['항목', '2018/12(IFRS연결)', '2019/12(IFRS연결)', '2020/12(I
 now = datetime.now()
 now = now.strftime("%Y%m%d%H%M%S")
 
-df.to_csv(f"test({now}).csv", index=False)
+df.to_csv(f"C:/Users/moons/Documents/GitHub/ubion_7/230411/test({now}).csv", index=False)
