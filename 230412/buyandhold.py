@@ -1,9 +1,12 @@
 import numpy as np
 from datetime import datetime
+import pandas as pd
 
-def bnh(df, column, start, end):
-    start = datetime.strptime(start, '%Y%m%d').isoformat()
-    end = datetime.strptime(end, '%Y%m%d').isoformat()
+def bnh(df, column = 'Close', start = '20000101', end = '20200101'):
+    # 인덱스 시계열로 변경
+    df.index = pd.to_datetime(df.index)
+    start = datetime.strptime(start, '%Y%m%d')
+    end = datetime.strptime(end, '%Y%m%d')
     df = df.loc[start : end]
     # 결측치, 무한대 제외
     df = df.loc[~df.isin([np.nan, np.inf, -np.inf]).any(axis='columns')]
