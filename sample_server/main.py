@@ -1,6 +1,7 @@
 ## flask 로드 
 from flask import Flask, render_template
 import pandas as pd
+import buyandhold
 
 ## Class 생성
 app = Flask(__name__)
@@ -20,13 +21,13 @@ def index():
                     "누적확진률"]
     df.sort_values("등록일시", inplace=True)
     df["일일확진자"] = df["확진자"].diff().fillna(0)
-    df_2 = df.tail(50)
+    df_2 = df.tail(100)
     _x = df_2["등록일시"].tolist()
     _y = df_2["일일확진자"].tolist()
     data = df_2.to_dict()
     cnt = len(df_2)
     columns = df_2.columns  # 데이터형 list
-    c_cnt = len(columns)
+    label =  '일일확진자'
     # print(data)
     # _x = [1,2,3,4,5]
     # _y = [40, 20, 10, 40, 100]
@@ -35,8 +36,8 @@ def index():
                             y_pos=_y, 
                             cnt = cnt, 
                             data = data, 
-                            c_cnt = c_cnt, 
-                            columns = columns)
+                            columns = columns, 
+                            name = label)
 
 @app.route("/index2")
 def index2():
@@ -64,5 +65,23 @@ def index2():
                             data = data, 
                             c_cnt = c_cnt, 
                             columns = columns)
+
+@app.route("/test")
+def test():
+    df = pd.read_csv("../csv/AAPL.csv", index_col='Date')
+    result = buyandhold.bnh(df)
+    _x = result['Date'].tolist()
+    _y = result['st_rtn'].tolist()
+    cnt = len(result)
+    columns = result.columns
+    data = result.to_dict()
+    label = '누적수익율'
+    return render_template('index.html', 
+                           x_pos = _x, 
+                           y_pos = _y, 
+                           cnt = cnt, 
+                           data = data, 
+                           columns = columns, 
+                           name = label)
 
 app.run(port=3000)
