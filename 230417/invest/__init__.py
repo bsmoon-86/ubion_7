@@ -1,5 +1,6 @@
 from invest.quant import momentum as mm
 from invest.quant import buyandhold as bnh
+from invest.quant import bollinger as boll
 
 
 class Invest:
@@ -11,12 +12,18 @@ class Invest:
         self.start = _start
         self.end = _end
 
-    def moment(self):
+    def momentum(self):
         self.df1 = mm.first(self.df, self.col, self.start, self.end)
         self.df2 = mm.second(self.df1)
         self.result = mm.third(self.df1, self.df2)
         return self.result
     
-    def buy(self):
+    def buyandhold(self):
         self.result = bnh.bnh(self.df, self.col, self.start, self.end)
+        return self.result
+    
+    def bollinger(self):
+        self.result = boll.create_band(self.df, self.col, self.start, self.end)
+        self.result = boll.add_trade(self.result)
+        self.result = boll.add_rtn(self.result)
         return self.result
