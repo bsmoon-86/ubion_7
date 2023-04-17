@@ -1,4 +1,5 @@
-import (momentum, buyandhold)
+from invest.quant import momentum as mm
+from invest.quant import buyandhold as bnh
 
 
 class Invest:
@@ -11,11 +12,11 @@ class Invest:
         self.end = _end
 
     def moment(self):
-        self.df1 = momentum.first(self.df, self.col, self.start, self.end)
-        self.df2 = momentum.second(self.df1)
-        self.result = momentum.third(self.df1, self.df2)
+        self.df1 = mm.first(self.df, self.col, self.start, self.end)
+        self.df2 = mm.second(self.df1)
+        self.result = mm.third(self.df1, self.df2)
         return self.result
     
-    def buyandhold(self):
+    def buy(self):
         self.result = bnh.bnh(self.df, self.col, self.start, self.end)
         return self.result
