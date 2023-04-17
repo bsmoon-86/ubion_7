@@ -24,3 +24,6 @@ class Database:
             self.db.commit()
             result = "Query OK"
         return result
+    
+    def sql_close(self):
+        self.db.close()
