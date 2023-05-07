@@ -1,12 +1,23 @@
+<form action="/invest" method="get">
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <div class="navbar-nav">
-      <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="#">Sign out</a>
-      </div>
-    </div>
-  </header>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" name="file">
+      
+      <input class="form-check-input" type="radio" name="type" id="type1" value="buyandhold" checked>
+      <label class="form-check-label navbar-brand" for="type1">
+        buyandhold
+      </label>
+      <input class="form-check-input" type="radio" name="type" id="type2" value="boliinger">
+      <label class="form-check-label navbar-brand" for="type2">
+        boliinger
+      </label>
+      <input class="form-check-input" type="radio" name="type" id="type3" value="momentum">
+      <label class="form-check-label navbar-brand" for="type3">
+        momentum
+      </label>
+      <input type="submit" class="btn btn-secondary" value='Search'>
+</header>
+</form>

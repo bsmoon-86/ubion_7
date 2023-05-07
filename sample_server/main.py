@@ -1,7 +1,7 @@
 ## flask 로드 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import pandas as pd
-import buyandhold
+import invest
 
 ## Class 생성
 app = Flask(__name__)
@@ -66,16 +66,27 @@ def index2():
                             c_cnt = c_cnt, 
                             columns = columns)
 
-@app.route("/test")
+@app.route("/invest")
 def test():
-    df = pd.read_csv("../csv/AAPL.csv", index_col='Date')
-    result = buyandhold.bnh(df)
+    file_name = request.args['file']
+    invest_type = request.args['type']
+    print(file_name, invest_type)
+    df = pd.read_csv(f"../csv/{file_name}.csv", index_col='Date')
+    invest_class = invest.Invest(df)
+    if invest_type == 'buyandhold':
+        result = invest_class.buyandhold()
+    elif invest_type == 'bollinger':
+        result = invest_class.bollinger()
+    else:
+        result = invest_class.momentum()
     _x = result['Date'].tolist()
-    _y = result['st_rtn'].tolist()
+    _y = result['acc_rtn'].tolist()
     cnt = len(result)
     columns = result.columns
-    data = result.to_dict()
+    data = result.to_dict(orient='records')
     label = '누적수익율'
+    print("column : ", columns)
+    print("DATA :",  result.head(5).to_dict(orient='records'))
     return render_template('index.html', 
                            x_pos = _x, 
                            y_pos = _y, 

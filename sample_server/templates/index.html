@@ -81,11 +81,7 @@
               <!-- tr은 테이블에 행을 추가 -->
               <tr>
                 {%for col in columns%}
-                  {%if col == "인덱스"%}
-                    <td>{{data[col][i]+1}}</td>
-                  {%else%}
-                    <td>{{data[col][i]}}</td>
-                  {%endif%}
+                    <td>{{data[i][col]}}</td>
                 {%endfor%}
               </tr>
             {%endfor%}
